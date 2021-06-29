@@ -1,0 +1,220 @@
+/*Linked List 구현
+작성자: 허난경
+작성일: 2021.06.28
+*/
+
+#include <stdio.h> // 헤더파일 포함
+#include <string.h> //strcpy 함수, memset 함수
+#include <stdlib.h> //malloc 함수
+
+typedef struct _TreeNode {
+	char value; // 부모노드
+	struct _TreeNode* leftCh; // 자식노드 왼쪽
+	struct _TreeNode* rightCh; // 자식노드 오른쪽
+} TreeNode;
+
+/*노드를 탐색하는 함수
+	1) where이라는 새로운 TreeNode 생성
+	2) where의 value값보다 찾는 값이 작을 경우 where은 왼쪽 자식 노드가 됨.
+	3) where의 value값보다 찾는 값이 클 경우 where은 오른쪽 자식 노드가 됨.
+	4) where의 value값과 찾는 값이 동일할 경우 where을 반환하고 동일하지 않을 경우에는 메시지를 호출하고 treeNode를 반환함.
+*//*
+TreeNode* searchNode(TreeNode Treenode, TreeNode* Treenode_ptr, char s) {
+	TreeNode FTree = Treenode;
+	TreeNode* where = &FTree;
+	if (where->value == s)
+		return where;
+	printf("1");
+	while(where->value != s) {
+
+		printf("2");
+		FTree = where_leftCh;
+			where = searchNode(where.leftCh->value, where->leftCh, s);
+
+			printf("3");
+			if (where->value == s) {
+
+				printf("4");
+				break;
+			}
+
+			printf("5");
+			where = searchNode(where.rightCh, where->rightCh, s);
+
+			printf("6");
+			if (where->value == s) {
+
+				printf("7");
+				break;
+			}
+	}
+
+	printf("8");
+	return where;
+}*/
+
+/*
+TreeNode* searchNode(TreeNode* Treenode, char s) {
+	TreeNode* where = Treenode;
+	while (where->value != s) {
+		if (where->leftCh->value == s)
+			return where->leftCh;
+		else if (where->rightCh->value == s)
+			return where->rightCh;
+		else 
+			if (where->leftCh->rightCh->value < s) {
+			where = searchNode(where->rightCh, s);
+		}else
+			where = searchNode(where->leftCh, s);
+	}
+	return where;
+}
+*//*
+TreeNode* searchNode(TreeNode* Treenode, char s) {
+	TreeNode* where = Treenode;
+	if (where->value != s) {
+		printf("3");
+		if(where->leftCh->value >= 65 && where->leftCh->value <= 90)
+			where = searchNode(where->leftCh, s);
+		if (where->value == s)
+			return where;
+		printf("4");
+		if(where->rightCh->value >= 65 && where->rightCh->value <= 90)
+			where = searchNode(where->rightCh, s);
+
+	}
+	printf("5");
+	return where;
+
+	/*
+	while (where->value != s) {
+		if (where->leftCh->value == s)
+			return where->leftCh;
+		else if (where->rightCh->value == s)
+			return where->rightCh;
+		if (where->leftCh->rightCh->value != 'null') {
+			if (where->leftCh->rightCh->value < s)
+				where = searchNode(where->rightCh, s);
+			else
+				where = searchNode(where->leftCh, s);
+		} else if(where->rightCh->leftCh->value != 'null') {
+			if (where->rightCh->leftCh->value < s)
+				where = searchNode(where->rightCh, s);
+			else
+				where = searchNode(where->leftCh, s);
+		}
+
+		else
+			if (where->leftCh->rightCh->value < s) {
+				where = searchNode(where->rightCh, s);
+			}
+			else
+				where = searchNode(where->leftCh, s);
+	}
+	return where;
+}*/
+TreeNode* getLeft(TreeNode* treenode) {
+	return treenode->leftCh;
+}
+
+TreeNode* getRight(TreeNode* treenode) {
+	return treenode->rightCh;
+}
+
+TreeNode* searchNode(TreeNode* Treenode, char s, int n) {
+	TreeNode* where = Treenode;
+	int a = n, k =0;
+	while (a >= 1) {
+		a -= 2;
+		k++;
+		
+	}
+
+	while (n) {
+		where = Treenode;
+		for (int i = 0; i < k; i++) {
+			getLeft(where);
+			for (int j = k; j > 0; j--) {
+				getRight(where);
+				if (where->value == s)
+					break;
+			}
+		}
+		if (where->value == s)
+			break;
+	}
+	return where;
+}/*
+
+
+	TreeNode* where = Treenode;
+	for (where->value = Treenode->value; where->leftCh->value != 'null'; where->value = where->leftCh->value)
+		if (where->value == s)
+			return where;
+
+	for (where->value = Treenode->value; where->rightCh->value != 'null'; where->value = where->rightCh->value)
+		if (where->value == s)
+			return where;
+	for()
+	if (Treenode->value == 'null')
+		return 0;
+	if (Treenode->value == s)
+		return Treenode;
+	return Treenode = searchNode(Treenode->leftCh, s) + Treenode = searchNode(Treenode->rightCh, s);
+}
+*/
+void treeInOrder(TreeNode* treenode) { 
+	if (treenode->value != 'null') {
+		treeInOrder(treenode->leftCh);
+		printf("%c", treenode->value);
+		treeInOrder(treenode->rightCh);
+	}
+}
+
+int main() // main 함수 head
+{//main 함수 시작
+	int n = 0;
+
+	TreeNode* treeNode = malloc(sizeof(TreeNode));
+
+	scanf_s("%d", &n);
+	getchar();
+	
+	for (int i = 0; i < n; i++)
+	{
+		char parent, leftChild, rightChild;
+		scanf_s("%c %c %c", &parent, 1, &leftChild, 1, &rightChild, 1);
+		getchar();
+		TreeNode* left = malloc(sizeof(TreeNode));
+		TreeNode* right = malloc(sizeof(TreeNode));
+		TreeNode* making = malloc(sizeof(TreeNode));
+		left->value = 'null';
+		right->value = 'null';
+
+
+		if (leftChild != '.') {
+			left->value = leftChild;
+		}
+		if (rightChild != '.') {
+			right->value = rightChild;
+		}
+
+		if (i == 0) {
+			treeNode->value = parent;
+			treeNode->leftCh = left;
+			treeNode->rightCh = right;
+		}
+
+		if (i != 0) {
+			making = searchNode(treeNode, parent, n);
+			making->leftCh = left;
+			making->rightCh = right;
+			printf("요기");
+		}
+		/*
+		//if (i == n - 1)
+		printf("?");
+			treeInOrder(treeNode);
+			printf("실해");*/
+	}
+}// main 함수 끝
